@@ -3,14 +3,15 @@ import pandas as pd
 import numpy as np
 import joblib
 
-# Load model dan fitur
-model = joblib.load(open("model.pkl", "rb"))
-features = joblib.load(open("features.pkl", "rb"))
+# Load model dan scaler
+model = joblib.load(open("model_obesitas.pkl", "rb"))
 scaler = joblib.load(open("scaler.pkl", "rb"))
 
-st.set_page_config(page_title="Prediksi Obesitas", layout="centered")
-st.title("🎯 Prediksi Obesitas Berdasarkan Gaya Hidup")
-st.write("Silakan isi data gaya hidupmu di bawah ini untuk memprediksi kategori obesitas:")
+# Daftar fitur manual (sesuai urutan pelatihan model)
+features = [
+    'Gender', 'Age', 'Height', 'Weight', 'family_history_with_overweight', 'FAVC',
+    'FCVC', 'NCP', 'CAEC', 'SMOKE', 'CH2O', 'SCC', 'FAF', 'TUE', 'CALC', 'MTRANS'
+]
 
 # Mapping input
 binary_mapping = {"Ya": 1, "Tidak": 0}
@@ -27,6 +28,10 @@ label_mapping = {
     5: "Obesity_Type_II",
     6: "Obesity_Type_III"
 }
+
+st.set_page_config(page_title="Prediksi Obesitas", layout="centered")
+st.title("🎯 Prediksi Obesitas Berdasarkan Gaya Hidup")
+st.write("Silakan isi data gaya hidupmu di bawah ini untuk memprediksi kategori obesitas:")
 
 def user_input():
     input_data = {}
@@ -71,8 +76,6 @@ def user_input():
         elif feature == 'MTRANS':
             val = st.selectbox("Transportasi utama?", list(mtrans_mapping.keys()))
             input_data[feature] = mtrans_mapping[val]
-        else:
-            input_data[feature] = st.number_input(f"{feature}", min_value=0.0)
     return pd.DataFrame([input_data])
 
 # Input & Prediksi
