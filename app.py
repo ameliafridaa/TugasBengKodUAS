@@ -10,11 +10,11 @@ st.title("Prediksi Tingkat Obesitas")
 st.write("Silakan masukkan data pasien untuk prediksi tingkat obesitas")
 
 # Muat Model
-with open("model_tuned.pkl", "rb") as f:
+with open("model_obesitas.pkl", "rb") as f:
     model = pickle.load(f)
 
 # Muat Model Columns
-with open("model_columns.pkl", "rb") as f:
+with open("model_col.pkl", "rb") as f:
     model_columns = pickle.load(f)
 
 
