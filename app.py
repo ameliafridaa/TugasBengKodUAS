@@ -83,11 +83,10 @@ input_df = user_input()
 
 if st.button("Prediksi"):
     try:
-        # Pastikan urutan fitur sama seperti saat training
-        expected_features = scaler.feature_names_in_ if hasattr(scaler, 'feature_names_in_') else features
-        input_df = input_df[expected_features]
+        # Pastikan urutan kolom sesuai saat training
+        input_df = input_df[features]
 
-        # Transform dan prediksi
+        # Skala dan prediksi
         input_scaled = scaler.transform(input_df)
         pred = model.predict(input_scaled)
         pred_label = label_mapping.get(pred[0], "Tidak diketahui")
