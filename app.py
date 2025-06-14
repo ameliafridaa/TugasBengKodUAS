@@ -5,7 +5,7 @@ import pandas as pd
 # 1. Load model & scaler
 # ---------------------------
 try:
-    with open("/mount/src/tugasbengkoduas/model.pkl", "rb") as f:
+    with open("/mount/src/tugasbengkoduas/model_obesitas.pkl", "rb") as f:
         model = pickle.load(f)
     with open("/mount/src/tugasbengkoduas/scaler.pkl", "rb") as f:
         scaler = pickle.load(f)
